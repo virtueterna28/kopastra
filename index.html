@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOPASTRA - Komando Pasukan SMA Ar-Rohmah Putra</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kopastraRed: '#940000',
+                        kopastraRedDark: '#6b0000',
+                        kopastraBlue: '#233686',
+                        kopastraBlueDark: '#192868',
+                        kopastraGold: '#D4AF37',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(148, 0, 0, 0.35)',
+                        'card': '0 10px 30px -5px rgba(0, 0, 0, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styling for slider animation and smooth visual accents */
+        .slider-item {
+            transition: opacity 0.8s ease-in-out;
+        }
+        .bg-pattern {
+            background-image: radial-gradient(rgba(148, 0, 0, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .gradient-overlay {
+            background: linear-gradient(180deg, rgba(35, 54, 134, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #233686;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #940000;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
+
+    <!-- Header Navigation -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#233686] text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo & Title -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-amber-400 shadow-md group-hover:scale-105 transition-transform duration-300">
+                        <img src="https://github.com/virtueterna28/kopastra/blob/main/kopastra.jpg?raw=true" 
+                             alt="Logo Kopastra" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='https://placehold.co/100x100/233686/ffffff?text=KOPASTRA'">
+                    </div>
+                    <div>
+                        <span class="font-heading font-extrabold text-xl tracking-wider text-white block leading-tight">KOPASTRA</span>
+                        <span class="text-[10px] text-amber-300 tracking-widest uppercase font-semibold">SMA Ar-Rohmah Putra</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-6 text-sm font-medium">
+                    <a href="#home" class="px-3 py-2 text-white hover:text-amber-300 transition-colors rounded-md hover:bg-white/10">Home</a>
+                    <a href="#tentang" class="px-3 py-2 text-white hover:text-amber-300 transition-colors rounded-md hover:bg-white/10">Tentang Kami</a>
+                    <a href="#struktur" class="px-3 py-2 text-white hover:text-amber-300 transition-colors rounded-md hover:bg-white/10">Struktur Keanggotaan</a>
+                    <a href="#medsos" class="px-3 py-2 text-white hover:text-amber-300 transition-colors rounded-md hover:bg-white/10">Media Sosial</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#kontak" class="inline-flex items-center gap-2 bg-[#940000] hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-red-500/30">
+                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                        <span>Hubungi Kami</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-white hover:text-amber-300 focus:outline-none p-2 rounded-lg hover:bg-white/10" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-kopastraBlueDark border-t border-white/10 px-4 pt-3 pb-6 space-y-2">
+            <a href="#home" class="mobile-link block px-4 py-2.5 rounded-lg text-white font-medium hover:bg-white/10 hover:text-amber-300">Home</a>
+            <a href="#tentang" class="mobile-link block px-4 py-2.5 rounded-lg text-white font-medium hover:bg-white/10 hover:text-amber-300">Tentang Kami</a>
+            <a href="#struktur" class="mobile-link block px-4 py-2.5 rounded-lg text-white font-medium hover:bg-white/10 hover:text-amber-300">Struktur Keanggotaan</a>
+            <a href="#medsos" class="mobile-link block px-4 py-2.5 rounded-lg text-white font-medium hover:bg-white/10 hover:text-amber-300">Media Sosial</a>
+            <a href="#kontak" class="mobile-link block w-full text-center mt-4 bg-[#940000] text-white font-semibold py-3 rounded-xl shadow-md">
+                <i class="fa-solid fa-paper-plane mr-2"></i> Hubungi Kami
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Slider Section -->
+    <section id="home" class="relative pt-20 h-[88vh] min-h-[580px] max-h-[850px] overflow-hidden bg-slate-900">
+        <!-- Image Slider Container -->
+        <div id="hero-slider" class="relative w-full h-full">
+            <!-- Slide 1 -->
+            <div class="slider-item absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+                <img src="https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/IMG-20250830-WA0047-scaled.jpeg?raw=true" 
+                     alt="Kegiatan Pramuka Kopastra 1" 
+                     class="w-full h-full object-cover"
+                     onerror="this.src='https://placehold.co/1920x1080/1e293b/ffffff?text=KOPASTRA+Kegiatan+1'">
+                <div class="absolute inset-0 gradient-overlay"></div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slider-item absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+                <img src="https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05370.jpg?raw=true" 
+                     alt="Kegiatan Pramuka Kopastra 2" 
+                     class="w-full h-full object-cover"
+                     onerror="this.src='https://placehold.co/1920x1080/1e293b/ffffff?text=KOPASTRA+Kegiatan+2'">
+                <div class="absolute inset-0 gradient-overlay"></div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slider-item absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+                <img src="https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05374.jpg?raw=true" 
+                     alt="Kegiatan Pramuka Kopastra 3" 
+                     class="w-full h-full object-cover"
+                     onerror="this.src='https://placehold.co/1920x1080/1e293b/ffffff?text=KOPASTRA+Kegiatan+3'">
+                <div class="absolute inset-0 gradient-overlay"></div>
+            </div>
+        </div>
+
+        <!-- Hero Content Overlay -->
+        <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center text-white pointer-events-auto">
+                <!-- Badge Tag -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-amber-300 text-xs sm:text-sm font-semibold mb-6 animate-pulse">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>Pondok Pesantren Ar-Rohmah Putra Malang</span>
+                </div>
+                
+                <!-- Main Headline -->
+                <h1 class="font-heading text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
+                    Satu Cita, Satu Langkah,<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-red-400">Salam Pramuka KOPASTRA!</span>
+                </h1>
+                
+                <!-- Subheadline -->
+                <p class="text-base sm:text-lg md:text-xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed mb-8 drop-shadow">
+                    Wadah pembentukan karakter tangguh, kedisiplinan, dan jiwa kepemimpinan santri muda yang berlandaskan Satya dan Darma Pramuka.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#tentang" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#940000] hover:bg-red-700 text-white font-bold px-7 py-3.5 rounded-full shadow-lg hover:shadow-red-900/50 transition-all duration-300 hover:-translate-y-1">
+                        <span>Jelajahi Profil Kopastra</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    <a href="#struktur" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-3.5 rounded-full backdrop-blur-md border border-white/30 transition-all duration-300 hover:-translate-y-1">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Struktur Pengurus</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <button id="prev-slide" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 transition-all hover:scale-110" aria-label="Previous Slide">
+            <i class="fa-solid fa-chevron-left text-lg"></i>
+        </button>
+        <button id="next-slide" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 transition-all hover:scale-110" aria-label="Next Slide">
+            <i class="fa-solid fa-chevron-right text-lg"></i>
+        </button>
+
+        <!-- Slider Dot Indicators -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex space-x-3">
+            <button class="slider-dot w-3 h-3 rounded-full bg-amber-400 transition-all" data-index="0" aria-label="Go to Slide 1"></button>
+            <button class="slider-dot w-3 h-3 rounded-full bg-white/50 transition-all" data-index="1" aria-label="Go to Slide 2"></button>
+            <button class="slider-dot w-3 h-3 rounded-full bg-white/50 transition-all" data-index="2" aria-label="Go to Slide 3"></button>
+        </div>
+    </section>
+
+    <!-- Tentang Kopastra Section -->
+    <section id="tentang" class="py-20 md:py-28 bg-white relative bg-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Content Column -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-red-100 text-[#940000] text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Mengenal Kopastra</span>
+                    </div>
+
+                    <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                        Komando Pasukan <span class="text-[#940000]">SMA Ar-Rohmah Putra</span>
+                    </h2>
+
+                    <div class="w-20 h-1.5 bg-[#940000] rounded-full"></div>
+
+                    <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal text-justify">
+                        <strong class="text-slate-900 font-semibold">Kopastra (komando pasukan SMA Ar-Rohmah Putra)</strong> adalah sebuah organisasi kepanduan yang menjadi wadah pengembangan karakter, keterampilan, dan kepemimpinan bagi generasi santri muda. Organisasi ini menyelenggarakan pendidikan nonformal di luar sekolah melalui kegiatan menarik, menantang, dan edukatif di alam terbuka.
+                    </p>
+
+                    <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal text-justify">
+                        Dengan berlandaskan pada <strong class="text-[#940000] font-semibold">Satya dan Darma Pramuka</strong>, gerakan ini bertujuan membentuk pribadi yang tangguh, berakhlak mulia, serta cinta tanah air.
+                    </p>
+
+                    <!-- Key Value Cards Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 shadow-sm hover:border-red-200 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-[#233686] text-amber-300 flex items-center justify-center mb-3">
+                                <i class="fa-solid fa-tree text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1">Alam Terbuka</h3>
+                            <p class="text-xs text-slate-500">Kegiatan menantang dan edukatif di alam bebas.</p>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 shadow-sm hover:border-red-200 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-[#940000] text-white flex items-center justify-center mb-3">
+                                <i class="fa-solid fa-award text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1">Karakter Tangguh</h3>
+                            <p class="text-xs text-slate-500">Membentuk pribadi disiplin, jujur, & mandiri.</p>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 shadow-sm hover:border-red-200 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-[#233686] text-amber-300 flex items-center justify-center mb-3">
+                                <i class="fa-solid fa-heart text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1">Akhlak Mulia</h3>
+                            <p class="text-xs text-slate-500">Integrasi nilai keislaman dan Tri Satya Pramuka.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Image Column -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Decorative Frame Behind Image -->
+                        <div class="absolute -top-4 -left-4 w-full h-full border-2 border-[#940000] rounded-2xl z-0"></div>
+                        <div class="absolute -bottom-4 -right-4 w-full h-full bg-[#233686]/10 rounded-2xl z-0"></div>
+
+                        <!-- Image Card -->
+                        <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl group border-4 border-white">
+                            <img src="https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/IMG-20250830-WA0047-scaled.jpeg?raw=true" 
+                                 alt="Kopastra Dalam Aksi" 
+                                 class="w-full h-[420px] object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x800/233686/ffffff?text=Kopastra+SMA+Ar-Rohmah'">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                            
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-white/90 backdrop-blur-md shadow-lg border border-white/50">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-[#940000] text-amber-300 flex items-center justify-center font-bold text-xl flex-shrink-0">
+                                        <i class="fa-solid fa-campground"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-900 text-sm">Semangat Kepanduan Santri</h4>
+                                        <p class="text-xs text-slate-600">Ar-Rohmah Putra Malang</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Struktur Keanggotaan Section -->
+    <section id="struktur" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-blue-100 text-[#233686] text-xs font-bold uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-users-viewfinder"></i>
+                    <span>Struktur Organisasi</span>
+                </div>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-slate-900">
+                    Pengurus <span class="text-[#940000]">KOPASTRA</span>
+                </h2>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base">
+                    Para pimpinan dan andalan koordinator penggerak kedisiplinan serta kepemimpinan santri.
+                </p>
+                <div class="w-16 h-1 bg-[#940000] mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Filter Tabs & Search Bar -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-2 w-full md:w-auto" id="filter-container">
+                    <button class="filter-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-[#940000] text-white shadow-md" data-category="all">
+                        Semua Divisi
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200" data-category="pimpinan">
+                        Pimpinan & Inti
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200" data-category="latihan">
+                        Urusan Latihan
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200" data-category="perkap">
+                        Perlengkapan
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200" data-category="seni">
+                        Urusan Seni
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-slate-700 hover:bg-slate-200 border border-slate-200" data-category="step">
+                        Urusan Step
+                    </button>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full md:w-64">
+                    <input type="text" id="member-search" placeholder="Cari nama pengurus..." class="w-full pl-10 pr-4 py-2 rounded-full text-xs sm:text-sm border border-slate-300 focus:outline-none focus:border-[#233686] focus:ring-2 focus:ring-blue-200">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Team Members Grid -->
+            <div id="members-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Dynamic cards populated via JavaScript -->
+            </div>
+
+            <!-- No Results Message -->
+            <div id="no-results" class="hidden text-center py-12 text-slate-500">
+                <i class="fa-regular fa-face-frown text-4xl mb-3 text-slate-400"></i>
+                <p class="text-base font-medium">Pengurus tidak ditemukan dengan kata kunci tersebut.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Media Sosial Section -->
+    <section id="medsos" class="py-20 bg-gradient-to-br from-[#233686] via-[#192868] to-slate-900 text-white relative overflow-hidden">
+        <!-- Background Accents -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span>Tetap Terhubung</span>
+                </div>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold">
+                    Media Sosial Resmi <span class="text-amber-400">KOPASTRA</span>
+                </h2>
+                <p class="text-slate-300 mt-2 text-sm sm:text-base">
+                    Ikuti dokumentasi kegiatan, keseruan, dan pembaruan informasi terkini melalui platform kami.
+                </p>
+                <div class="w-16 h-1 bg-amber-400 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Social Media Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- Instagram Card -->
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 flex flex-col items-center text-center group hover:-translate-y-2">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center text-4xl shadow-lg mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl text-white mb-2">Instagram</h3>
+                    <p class="text-amber-300 font-semibold text-lg mb-4">@kopastraofficial</p>
+                    <p class="text-slate-300 text-sm mb-6 max-w-xs">
+                        Lihat galeri foto kegiatan, story liputan langsung, dan sorotan momen berharga kepramukaan santri.
+                    </p>
+                    <a href="https://www.instagram.com/kopastraofficial/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-6 py-3 rounded-full shadow-lg transition-all w-full justify-center">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Ikuti di Instagram</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- TikTok Card -->
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 flex flex-col items-center text-center group hover:-translate-y-2">
+                    <div class="w-20 h-20 rounded-2xl bg-slate-900 text-white border border-slate-700 flex items-center justify-center text-4xl shadow-lg mb-6 group-hover:scale-110 transition-transform relative">
+                        <i class="fa-brands fa-tiktok text-cyan-400"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl text-white mb-2">TikTok</h3>
+                    <p class="text-amber-300 font-semibold text-lg mb-4">@kopastraofficial</p>
+                    <p class="text-slate-300 text-sm mb-6 max-w-xs">
+                        Saksikan video kreatif, atraksi variasi ketangkasan, dan dokumentasi singkat yang seru.
+                    </p>
+                    <a href="https://www.tiktok.com/@kopastraofficial" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-black text-white font-bold px-6 py-3 rounded-full shadow-lg border border-slate-700 transition-all w-full justify-center">
+                        <i class="fa-brands fa-tiktok"></i>
+                        <span>Ikuti di TikTok</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Kontak Section -->
+    <footer id="kontak" class="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://github.com/virtueterna28/kopastra/blob/main/kopastra.jpg?raw=true" 
+                             alt="Logo Kopastra Footer" 
+                             class="w-10 h-10 rounded-full border border-amber-400"
+                             onerror="this.src='https://placehold.co/100x100/233686/ffffff?text=KOPASTRA'">
+                        <span class="font-heading font-extrabold text-xl text-white tracking-wider">KOPASTRA</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Komando Pasukan SMA Ar-Rohmah Putra. Wadah pengembangan karakter kepanduan dan kepemimpinan generasi santri unggul.
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2">
+                        <a href="https://www.instagram.com/kopastraofficial/" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#940000] text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@kopastraofficial" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#940000] text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-tiktok text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-base mb-4 border-b border-[#940000] inline-block pb-1">Tautan Cepat</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#home" class="hover:text-amber-300 transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs text-red-500"></i> Home</a></li>
+                        <li><a href="#tentang" class="hover:text-amber-300 transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs text-red-500"></i> Tentang Kopastra</a></li>
+                        <li><a href="#struktur" class="hover:text-amber-300 transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs text-red-500"></i> Struktur Keanggotaan</a></li>
+                        <li><a href="#medsos" class="hover:text-amber-300 transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs text-red-500"></i> Media Sosial</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Principles -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-base mb-4 border-b border-[#940000] inline-block pb-1">Landasan Nilai</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-amber-400 mt-1"></i>
+                            <span>Tri Satya Pramuka</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-amber-400 mt-1"></i>
+                            <span>Dasa Darma Pramuka</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-amber-400 mt-1"></i>
+                            <span>Adab & Nilai Pesantren</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-amber-400 mt-1"></i>
+                            <span>Karakter Santri Mandiri</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Location & Institution -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-base mb-4 border-b border-[#940000] inline-block pb-1">Lokasi Markas</h4>
+                    <div class="space-y-3 text-sm text-slate-400">
+                        <p class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot text-[#940000] text-base mt-0.5"></i>
+                            <span>SMA Ar-Rohmah Putra, Kampus Pesantren Ar-Rohmah, Dau, Malang, Jawa Timur</span>
+                        </p>
+                        <p class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-building-columns text-amber-400"></i>
+                            <span>LPPH Ar-Rohmah Malang</span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright Bottom Bar -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 KOPASTRA - SMA Ar-Rohmah Putra. Hak Cipta Dilindungi.</p>
+                <p class="flex items-center gap-1">
+                    Dikembangkan dengan <i class="fa-solid fa-heart text-red-500"></i> untuk Santri Ar-Rohmah
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Organization Member Data
+        const teamMembers = [
+            // Pimpinan & Inti
+            {
+                name: "M. Dhaif Kusyu Nur H.",
+                title: "KA' KOORDINATOR",
+                category: "pimpinan",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05199.jpg?raw=true",
+                igHandle: "@dhaiif._",
+                igLink: "https://www.instagram.com/dhaiif._/"
+            },
+            {
+                name: "M. DZAKY AMMAR",
+                title: "PEMANGKU ADAT",
+                category: "pimpinan",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05327.jpg?raw=true",
+                igHandle: "@dzakmarr",
+                igLink: "https://www.instagram.com/dzakmarr/"
+            },
+            {
+                name: "MUHAMMAD DZAKY AL FAIRY",
+                title: "URUSAN KESEKRETARIATAN",
+                category: "pimpinan",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05310.jpg?raw=true",
+                igHandle: "@dzaaaaaky",
+                igLink: "https://www.instagram.com/dzaaaaaky/"
+            },
+            {
+                name: "NAFIS HERZA IMANI YUSUF",
+                title: "URUSAN KEUANGAN",
+                category: "pimpinan",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05617.jpg?raw=true",
+                igHandle: "@nafisherza_",
+                igLink: "https://www.instagram.com/nafisherza_/"
+            },
+
+            // Urusan Latihan
+            {
+                name: "MUHAMMAD ISYAN ARYASATYA",
+                title: "KETUA ANDALAN URUSAN LATIHAN",
+                category: "latihan",
+                isKetua: true,
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05599.jpg?raw=true",
+                igHandle: "@isyanzzz_",
+                igLink: "https://www.instagram.com/isyanzzz_/"
+            },
+            {
+                name: "M. Fatih Radeafala",
+                title: "Ankulat (Anak Buah Latihan)",
+                category: "latihan",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05318.jpg?raw=true",
+                igHandle: "@hi.fatihhh",
+                igLink: "https://www.instagram.com/hi.fatihhh/"
+            },
+            {
+                name: "Daffa' Hanif Amrullah",
+                title: "Ankulat (Anak Buah Latihan)",
+                category: "latihan",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05268.jpg?raw=true",
+                igHandle: "@_daffahnif",
+                igLink: "https://www.instagram.com/_daffahnif/"
+            },
+            {
+                name: "Ahmad Dzakwan Alify Zayyin",
+                title: "Ankulat (Anak Buah Latihan)",
+                category: "latihan",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05226.jpg?raw=true",
+                igHandle: "@alifyzyyin_",
+                igLink: "https://www.instagram.com/alifyzyyin_/"
+            },
+            {
+                name: "M. Dzaki Nafil",
+                title: "Ankulat (Anak Buah Latihan)",
+                category: "latihan",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05345.jpg?raw=true",
+                igHandle: "@zacknaf_",
+                igLink: "https://www.instagram.com/zacknaf_/"
+            },
+
+            // Urusan Perlengkapan
+            {
+                name: "NABIL AMRU ANDHARA HAMID",
+                title: "KETUA ANDALAN PERLENGKAPAN",
+                category: "perkap",
+                isKetua: true,
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05252.jpg?raw=true",
+                igHandle: "@nabilamru_/",
+                igLink: "https://www.instagram.com/nabilamru_/"
+            },
+            {
+                name: "Rizqullah Ilham Fathoni",
+                title: "Ankuperkap (Anak Buah Perkap)",
+                category: "perkap",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05322.jpg?raw=true",
+                igHandle: "@hrizilfath",
+                igLink: "https://www.instagram.com/rizilfath/"
+            },
+            {
+                name: "Faith Jadda Fillah",
+                title: "Ankuperkap (Anak Buah Perkap)",
+                category: "perkap",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05285.jpg?raw=true",
+                igHandle: "@faithnonchalant",
+                igLink: "https://www.instagram.com/faithnonchalant/"
+            },
+            {
+                name: "M. Afzaal Fazl Naim",
+                title: "Ankuperkap (Anak Buah Perkap)",
+                category: "perkap",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05213.jpg?raw=true",
+                igHandle: "@afzaall_",
+                igLink: "https://www.instagram.com/afzaall_/"
+            },
+            {
+                name: "Moch. Fathir Bintang Ananta",
+                title: "Ankuperkap (Anak Buah Perkap)",
+                category: "perkap",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05261.jpg?raw=true",
+                igHandle: "@ptirr21",
+                igLink: "https://www.instagram.com/ptirr21/"
+            },
+
+            // Urusan Seni
+            {
+                name: "ARKA ASYRAF RASYADAN",
+                title: "KETUA ANDALAN URUSAN SENI",
+                category: "seni",
+                isKetua: true,
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05352.jpg?raw=true",
+                igHandle: "@arkasyraf/",
+                igLink: "https://www.instagram.com/arkasyraf/"
+            },
+            {
+                name: "Nur Habibie Yusuf Ibrahim",
+                title: "Ankukasi (Anak Buah Seni)",
+                category: "seni",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05652.jpg?raw=true",
+                igHandle: "@habibieeibrahim",
+                igLink: "https://www.instagram.com/habibieeibrahim/"
+            },
+            {
+                name: "Rayandi Airawan Sukmawardana",
+                title: "Ankukasi (Anak Buah Seni)",
+                category: "seni",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05293.jpg?raw=true",
+                igHandle: "@r.ayand",
+                igLink: "https://www.instagram.com/r.ayand/"
+            },
+            {
+                name: "Dzaky Ghaisan Susanto",
+                title: "Ankukasi (Anak Buah Seni)",
+                category: "seni",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05302.jpg?raw=true",
+                igHandle: "@dzaky_gss",
+                igLink: "https://www.instagram.com/dzaky_gss/"
+            },
+
+            // Urusan Step
+            {
+                name: "M. ANIS MUWAFFAQ SIDDIK",
+                title: "KETUA ANDALAN URUSAN STEP",
+                category: "step",
+                isKetua: true,
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05255.jpg?raw=true",
+                igHandle: "@aniessmfq_",
+                igLink: "https://www.instagram.com/aniessmfq_/"
+            },
+            {
+                name: "Muhammad Denzel Abrisam",
+                title: "Ankustep (Anak Buah Step)",
+                category: "step",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05336.jpg?raw=true",
+                igHandle: "@dennnnz._",
+                igLink: "https://www.instagram.com/dennnnz._/"
+            },
+            {
+                name: "Attariq Haidar Rasyidih",
+                title: "Ankustep (Anak Buah Step)",
+                category: "step",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/DSC05632.jpg?raw=true",
+                igHandle: "@rsydiin_",
+                igLink: "https://www.instagram.com/rsydiin_/"
+            },
+            {
+                name: "Muhammad Haidar Faiz",
+                title: "Ankustep (Anak Buah Step)",
+                category: "step",
+                photo: "https://github.com/virtueterna28/kopastra/blob/main/mentahan%20foto/Cuplikan%20layar%202026-09-30%20131753.png?raw=true",
+                igHandle: "@haidar.fz_",
+                igLink: "https://www.instagram.com/haidar.fz_/"
+            }
+        ];
+
+        // Global State & Slider Controls
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slider-item');
+        const dots = document.querySelectorAll('.slider-dot');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.remove('opacity-0');
+                    slide.classList.add('opacity-100');
+                } else {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0');
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-white/50');
+                    dot.classList.add('bg-amber-400', 'w-8');
+                } else {
+                    dot.classList.remove('bg-amber-400', 'w-8');
+                    dot.classList.add('bg-white/50', 'w-3');
+                }
+            });
+
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            let prev = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(prev);
+        }
+
+        function startAutoSlider() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoSlider() {
+            clearInterval(slideInterval);
+        }
+
+        // Render Member Directory Cards
+        function renderMembers(categoryFilter = 'all', searchQuery = '') {
+            const grid = document.getElementById('members-grid');
+            const noResults = document.getElementById('no-results');
+            grid.innerHTML = '';
+
+            const filtered = teamMembers.filter(member => {
+                const matchesCategory = categoryFilter === 'all' || member.category === categoryFilter;
+                const matchesSearch = member.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      member.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      member.igHandle.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                
+                filtered.forEach(member => {
+                    const isKetua = member.isKetua || member.category === 'pimpinan';
+                    const badgeBg = isKetua ? 'bg-[#940000] text-white' : 'bg-slate-200 text-slate-800';
+
+                    const card = document.createElement('div');
+                    card.className = "bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-card hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group";
+
+                    card.innerHTML = `
+                        <div>
+                            <!-- Member Photo with Aspect Ratio -->
+                            <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                                <img src="${member.photo}" 
+                                     alt="${member.name}" 
+                                     class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.src='https://placehold.co/400x500/233686/ffffff?text=${encodeURIComponent(member.name)}'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+
+                            <!-- Member Info -->
+                            <div class="p-5 text-center">
+                                <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase mb-2 ${badgeBg}">
+                                    ${member.title}
+                                </span>
+                                <h3 class="font-heading font-bold text-slate-900 text-base line-clamp-1 group-hover:text-[#940000] transition-colors" title="${member.name}">
+                                    ${member.name}
+                                </h3>
+                            </div>
+                        </div>
+
+                        <!-- Instagram CTA Button Footer -->
+                        <div class="px-5 pb-5 pt-0">
+                            <a href="${member.igLink}" target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center gap-2 bg-slate-50 hover:bg-[#940000] text-slate-700 hover:text-white border border-slate-200 hover:border-[#940000] font-medium text-xs py-2.5 rounded-xl transition-all duration-300 shadow-sm">
+                                <i class="fa-brands fa-instagram text-sm"></i>
+                                <span>${member.igHandle}</span>
+                            </a>
+                        </div>
+                    `;
+
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        // Initialize DOM Event Handlers
+        window.addEventListener('DOMContentLoaded', () => {
+            // Slider Event Listeners
+            document.getElementById('next-slide').addEventListener('click', () => {
+                stopAutoSlider();
+                nextSlide();
+                startAutoSlider();
+            });
+
+            document.getElementById('prev-slide').addEventListener('click', () => {
+                stopAutoSlider();
+                prevSlide();
+                startAutoSlider();
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    stopAutoSlider();
+                    const index = parseInt(e.target.dataset.index);
+                    showSlide(index);
+                    startAutoSlider();
+                });
+            });
+
+            startAutoSlider();
+
+            // Initial Member List Render
+            renderMembers();
+
+            // Filter Tabs Click Logic
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => {
+                        b.classList.remove('active', 'bg-[#940000]', 'text-white', 'shadow-md');
+                        b.classList.add('bg-white', 'text-slate-700');
+                    });
+                    btn.classList.add('active', 'bg-[#940000]', 'text-white', 'shadow-md');
+                    btn.classList.remove('bg-white', 'text-slate-700');
+
+                    const category = btn.dataset.category;
+                    const searchQuery = document.getElementById('member-search').value;
+                    renderMembers(category, searchQuery);
+                });
+            });
+
+            // Member Search Logic
+            const searchInput = document.getElementById('member-search');
+            searchInput.addEventListener('input', (e) => {
+                const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+                renderMembers(activeCategory, e.target.value);
+            });
+
+            // Mobile Menu Toggle logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-xmark');
+                }
+            });
+
+            // Close Mobile Menu when link clicked
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // Header Background Scroll Effect
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-[#192868]', 'shadow-xl');
+                    header.classList.remove('bg-[#233686]');
+                } else {
+                    header.classList.add('bg-[#233686]');
+                    header.classList.remove('bg-[#192868]', 'shadow-xl');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
