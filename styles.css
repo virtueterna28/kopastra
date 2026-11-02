@@ -1,0 +1,209 @@
+/* Custom styling for slider animation and smooth visual accents */
+.slider-item {
+    transition: opacity 0.8s ease-in-out;
+}
+
+.bg-pattern {
+    background-image: radial-gradient(rgba(148, 0, 0, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.gradient-overlay {
+    background: linear-gradient(180deg, rgba(35, 54, 134, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #233686;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #940000;
+}
+
+/* Royal theme: navy blue, gold, and crown-inspired details */
+:root {
+    --royal-navy: #101b48;
+    --royal-blue: #1d3475;
+    --royal-gold: #f3c957;
+    --royal-cream: #fff4d1;
+}
+
+.kingdom-mode {
+    background: linear-gradient(135deg, #101b48 0%, #1d3475 48%, #b98725 100%) !important;
+    color: var(--royal-cream) !important;
+}
+
+.kingdom-mode #main-header {
+    background: linear-gradient(100deg, #101b48, #1d3475 68%, #8c671d) !important;
+    border-bottom: 1px solid rgba(243, 201, 87, 0.55);
+}
+
+.kingdom-mode #mobile-menu {
+    background: linear-gradient(135deg, #101b48, #233d80) !important;
+    border-color: rgba(243, 201, 87, 0.45) !important;
+}
+
+.kingdom-mode #tentang,
+.kingdom-mode #struktur {
+    background: linear-gradient(135deg, #13204f 0%, #1d3475 65%, #6f561f 100%) !important;
+    color: var(--royal-cream) !important;
+}
+
+.kingdom-mode #tentang h2,
+.kingdom-mode #struktur h2,
+.kingdom-mode #tentang h3,
+.kingdom-mode #struktur h3,
+.kingdom-mode #tentang h4,
+.kingdom-mode #struktur h4 {
+    color: #fff4d1 !important;
+}
+
+.kingdom-mode #tentang p,
+.kingdom-mode #struktur p {
+    color: #e4e9f5 !important;
+}
+
+.kingdom-mode #tentang .text-slate-900,
+.kingdom-mode #tentang .text-slate-800,
+.kingdom-mode #struktur .text-slate-900 {
+    color: #fff4d1 !important;
+}
+
+.kingdom-mode #tentang .bg-slate-50,
+.kingdom-mode #struktur #members-grid > div {
+    background: linear-gradient(145deg, #203a7d, #172755) !important;
+    color: #fff4d1 !important;
+    border: 1px solid rgba(243, 201, 87, 0.55) !important;
+    box-shadow: 0 14px 32px rgba(3, 9, 30, 0.32) !important;
+}
+
+.kingdom-mode #struktur .filter-btn:not(.active) {
+    background: rgba(255, 244, 209, 0.1) !important;
+    color: #fff4d1 !important;
+    border-color: rgba(243, 201, 87, 0.45) !important;
+}
+
+.kingdom-mode #struktur .filter-btn.active {
+    background: linear-gradient(135deg, #f3c957, #c99426) !important;
+    color: #101b48 !important;
+}
+
+.kingdom-mode #member-search {
+    background: rgba(255, 244, 209, 0.1) !important;
+    color: #fff4d1 !important;
+    border-color: rgba(243, 201, 87, 0.55) !important;
+}
+
+.kingdom-mode #member-search::placeholder {
+    color: #d3d8e8 !important;
+}
+
+.kingdom-mode #medsos {
+    background: linear-gradient(135deg, #101b48 0%, #1d3475 58%, #76591c 100%) !important;
+}
+
+.kingdom-mode #medsos > .max-w-7xl > div > div > div {
+    border-color: rgba(243, 201, 87, 0.45) !important;
+}
+
+.kingdom-mode #kontak {
+    background: linear-gradient(135deg, #0b1438, #172755 65%, #4e3c19) !important;
+    border-color: rgba(243, 201, 87, 0.45) !important;
+}
+
+.kingdom-mode .text-amber-300,
+.kingdom-mode .text-amber-400 {
+    color: var(--royal-gold) !important;
+}
+
+.kingdom-mode [class*="bg-[#940000]"] {
+    background: linear-gradient(135deg, #f3c957, #c99426) !important;
+    color: #101b48 !important;
+}
+
+.kingdom-mode [class*="text-[#940000]"] {
+    color: var(--royal-gold) !important;
+}
+
+.kingdom-mode [class*="border-[#940000]"] {
+    border-color: var(--royal-gold) !important;
+}
+
+.kingdom-mode .border-amber-400 {
+    border-color: var(--royal-gold) !important;
+}
+
+.kingdom-mode .bg-pattern {
+    background-image: radial-gradient(rgba(243, 201, 87, 0.16) 1px, transparent 1px);
+}
+
+.kingdom-mode .kingdom-toggle {
+    color: #101b48;
+    background: linear-gradient(135deg, #ffe28a, #d49d27);
+    box-shadow: 0 8px 28px rgba(3, 9, 30, 0.4), 0 0 18px rgba(243, 201, 87, 0.35);
+}
+
+.kingdom-toggle {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(255, 226, 138, 0.8);
+    border-radius: 999px;
+    color: #fff4d1;
+    background: linear-gradient(135deg, #172755, #101b48);
+    font: 700 0.85rem/1 'Plus Jakarta Sans', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(3, 9, 30, 0.35);
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.kingdom-toggle i {
+    font-size: 1.1rem;
+}
+
+.kingdom-toggle:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(3, 9, 30, 0.45), 0 0 18px rgba(243, 201, 87, 0.35);
+}
+
+.kingdom-toggle:focus-visible {
+    outline: 3px solid #fff4d1;
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    .kingdom-toggle {
+        right: 0.75rem;
+        bottom: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    .kingdom-toggle-label {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
